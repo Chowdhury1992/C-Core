@@ -1,1 +1,1 @@
-# C# -Core
+# C# Core
