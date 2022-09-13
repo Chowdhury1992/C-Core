@@ -105,11 +105,123 @@ namespace CSharpCorePractice
             
             for(int i = 0; i<arr.Length;i++)
             {
-                integerToString[i] = arr[i].ToString();
-                Console.WriteLine(integerToString[i]);
+                integerToString[i] = arr[i].ToString()!;
+              //  Console.WriteLine(integerToString[i]);
             }
             return integerToString;
 
+        }
+        //Find the Largest Numbers in a Group of Arrays
+        public static double[] MaximumNumberFinder(double[][]inputArr)
+        {
+            double[] arrayofMaximumNumbers = new double[inputArr.Length];
+            double temp = double.MinValue;
+         
+            for(int i = 0; i<inputArr.Length;i++)
+            {
+                for(int j= 0; j < inputArr[i].Length;j++)
+                {
+                    if (inputArr[i][j] > temp )
+
+                    {
+                        temp = inputArr[i][j];
+                    }
+                }
+                arrayofMaximumNumbers[i] = temp;
+                temp = int.MinValue;
+            }
+            for (int i = 0; i < arrayofMaximumNumbers.Length; i++)
+            {
+                
+                Console.WriteLine(arrayofMaximumNumbers[i]);
+            }
+            return arrayofMaximumNumbers;
+        }
+
+        //Collatz Conjecture
+        static int count = 0;
+        public static int CollatzConjecture(int n)
+        {
+            if (n > 1)
+            {
+                if (n % 2 == 0)
+                {
+                    n = n / 2;
+                    count++;
+                    CollatzConjecture(n);
+                }
+                else
+                {
+                    n = n * 3 + 1;
+                    count++;
+                    CollatzConjecture(n);
+                }
+            }
+            return count;
+        }
+        //Find the Characters Counterpart Char Code
+        public static int CounterpartCharCode(char charInput)
+        {
+            int charCode = 0;
+            char temp = ' ';
+            if( char.IsLower(charInput) ==true)
+            {
+              temp= char.ToUpper(charInput);
+                charCode = (int)temp;
+            }
+            else if (char.IsUpper(charInput) == true)
+            {
+                temp = char.ToLower(charInput);
+                charCode = (int)temp;
+            }
+            else if (char.IsDigit(charInput) == true)
+            {
+                charCode = (int)charInput;
+            }
+            return charCode;
+        }
+        //Count Ones in Binary Representation of Integer
+        public static int CountOnes(int inputInt)
+        {
+            int count = 0;
+            string binary = Convert.ToString(inputInt, 2);
+            for(int i = 0; i<binary.Length;i++)
+            {
+                if (binary[i]=='1')
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+        //Positive Count / Negative Sum
+        public static int[] PositiveCountNegativeSum(double[] arrayofPositiveAndNegative)
+        {
+            int count = 0;
+            int sumofNegativeNumbers = 0;
+            int[] PositiveCountNegativeSum = new int[2];
+            if (arrayofPositiveAndNegative.Length == 0)
+            {
+                PositiveCountNegativeSum = new int[0];
+            }
+            else
+            {
+                for (int i = 0; i < arrayofPositiveAndNegative.Length; i++)
+                {
+                    if (arrayofPositiveAndNegative[i] > 0)
+                    {
+                        count++;
+                    }
+                    else if (arrayofPositiveAndNegative[i] < 0)
+                    {
+                        sumofNegativeNumbers += (int)arrayofPositiveAndNegative[i];
+                    }
+                }
+
+                PositiveCountNegativeSum[0] = count;
+                PositiveCountNegativeSum[1] = sumofNegativeNumbers;
+            }
+                return PositiveCountNegativeSum;
         }
 
         static void Main(string[] args)
@@ -151,6 +263,38 @@ namespace CSharpCorePractice
             object[] arr = { 1, 2, "a", "b" };
             Console.WriteLine("Convert All Array Items to String");
             Console.WriteLine(ConvertAllArrayItemstoString(arr));
+
+            //Find the Largest Numbers in a Group of Arrays
+            double[][] inputArr = new double[][]
+            { 
+                new double[]{0.4321, 0.7634, 0.652},
+                new double[]{1.324, 9.32, 2.5423, 6.4314},
+                new double[]{ 9, 3, 6, 3 } 
+            } ;
+
+            Console.WriteLine("Find the Largest Numbers in a Group of Arrays");
+            MaximumNumberFinder(inputArr);
+
+            //Collatz Conjecture
+            Console.WriteLine("Collatz Conjecture");
+            int n = 10;
+            Console.WriteLine(CollatzConjecture(n));
+
+            //Find the Characters Counterpart Char Code
+            Console.WriteLine("Find the Characters Counterpart Char Code");
+            char charInput = 'a';
+            Console.WriteLine(CounterpartCharCode(charInput));
+
+            //Count Ones in Binary Representation of Integer
+            Console.WriteLine("Count Ones in Binary Representation of Integer");
+            int inputInt = 999;
+            Console.WriteLine(CountOnes(inputInt));
+
+            //Positive Count / Negative Sum
+            Console.WriteLine("Positive Count / Negative Sum");
+            double[] arrayofPositiveAndNegative = { 92, 6, 73, -77, 81, -90, 99, 8, -85, 34 };
+            Console.WriteLine(PositiveCountNegativeSum(arrayofPositiveAndNegative));
+          
         }
     }
 }
