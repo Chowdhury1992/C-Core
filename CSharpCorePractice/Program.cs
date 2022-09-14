@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.Metrics;
+using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 
 namespace CSharpCorePractice
@@ -223,7 +224,44 @@ namespace CSharpCorePractice
             }
                 return PositiveCountNegativeSum;
         }
+        //Fraction Greater Than One
+        public static bool GreaterThanOne(string fraction)
+        {
+           
+            string[] stringArray = fraction.Split('/');
+            double numberValueHolder = Double.Parse(stringArray[0])/ Double.Parse(stringArray[1]) ;
+           
+            if (numberValueHolder > 1)
+            {
+                Console.WriteLine(numberValueHolder);
+                return true;
+            }
+            else
+            {
+                Console.WriteLine(numberValueHolder);
+                return false;
+            }
+        }
 
+        //ATM PIN Code Validation
+        public static bool ValidatePIN(string pin)
+        {
+            if(pin.Length==4 || pin.Length==6)
+            {
+                for(int i = 0; i<pin.Length; i++)
+                {
+                    if (!char.IsDigit(pin[i]))
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         static void Main(string[] args)
         {
             //finding number of true values in an array
@@ -294,7 +332,15 @@ namespace CSharpCorePractice
             Console.WriteLine("Positive Count / Negative Sum");
             double[] arrayofPositiveAndNegative = { 92, 6, 73, -77, 81, -90, 99, 8, -85, 34 };
             Console.WriteLine(PositiveCountNegativeSum(arrayofPositiveAndNegative));
-          
+
+            //Fraction Greater Than One
+            Console.WriteLine("Fraction Greater Than One");
+            Console.WriteLine(GreaterThanOne("1/2"));
+
+            //ATM PIN Code Validation
+            Console.WriteLine("ATM PIN Code Validation");
+            Console.WriteLine(ValidatePIN(""));
+            
         }
     }
 }
